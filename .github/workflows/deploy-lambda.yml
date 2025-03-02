@@ -26,7 +26,7 @@ jobs:
         run: |
           CHANGED_LAMBDAS=""
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $file == */lambda_handler.py ]]; then
+            if [[ $file == */lambda_function.py ]]; then
               CHANGED_LAMBDAS+="$(dirname $file) "
             fi
           done
