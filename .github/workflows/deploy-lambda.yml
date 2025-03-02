@@ -23,17 +23,15 @@ jobs:
         uses: tj-actions/changed-files@v44
 
       - name: Filter changed Lambda functions
-        id: filter-lambdas
         run: |
           CHANGED_LAMBDAS=""
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $file == lambda*/* ]]; then
+            if [[ $file == */app.py ]]; then
               CHANGED_LAMBDAS+="$(dirname $file) "
             fi
           done
           # Remove duplicates and set output
           echo "changed=$(echo $CHANGED_LAMBDAS | tr ' ' '\n' | sort -u | tr '\n' ' ')" >> $GITHUB_ENV
-
       - name: Deploy changed Lambdas
         if: env.changed != ''
         run: |
